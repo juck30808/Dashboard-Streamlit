@@ -3,6 +3,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 
+### official docs: https://docs.streamlit.io/get-started
+
 # Step0: Web_config (option)
 st.set_page_config(
    page_title="Jerry's dashboard",    # 網頁標題：顯示在瀏覽器分頁的標籤上，預設是程式碼的檔名
