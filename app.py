@@ -2,7 +2,7 @@ import time
 import streamlit as st
 import numpy as np
 import pandas as pd
-import plotly.express as px # pip install ploly-express
+import plotly.express as px # zpip install ploly-express
 
 # Step0: Web_config (option)
 st.set_page_config(
