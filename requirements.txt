@@ -1,1 +1,2 @@
-pip install ploly-express
+plotly-express
+streamlit
