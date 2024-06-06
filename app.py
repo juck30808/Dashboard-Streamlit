@@ -33,9 +33,17 @@ df = pd.read_excel("Supermarket.xlsx",
 )
 ## BarChart Use Line:112
 df["hour"] = pd.to_datetime(df["Time"], format="%H:%M:%S").dt.hour
-
 #print(df)
 #st.dataframe(df)
+
+# ----- Status -------
+bar = st.progress(0)
+for i in range(100):
+    bar.progress(i + 1, f'目前進度 {i+1} %')
+    time.sleep(0.01)
+bar.progress(100, '載入完成！')
+
+
 
 # ----- Sidebar ----
 st.sidebar.header("條件過濾")
@@ -57,13 +65,7 @@ gender = st.sidebar.multiselect(
 df_selection = df.query( #@ 可以引用變數
     "City == @city & Customer_type == @customer_type & Gender == @gender"
 )
-st.title(":memo: RawData") #Dash
-st.dataframe(df_selection) #Display the selection result;
 
-# Check if the dataframe is empty:
-if df_selection.empty:
-    st.warning("No data available based on the current filter settings!")
-    st.stop() # This will halt the app from further execution.
 
 # ---- MAINPAGE ----
 st.title(":bar_chart: Dashboard") #Dash
@@ -113,7 +115,7 @@ fig_product_sales.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",         # 將背景改為透明
     xaxis=(dict(showgrid=False))          # 將x軸網格刪除
 )
-st.plotly_chart(fig_product_sales)
+#st.plotly_chart(fig_product_sales)
 
 # # Jupyter Test
 # 查看資料格式
@@ -136,14 +138,28 @@ fig_hourly_sales.update_layout(
     plot_bgcolor="rgba(0,0,0,0)",    # 背景為透明 
     yaxis=(dict(showgrid=False)),    # 將 y 軸隔線刪除
 )
-st.plotly_chart(fig_hourly_sales)
+#st.plotly_chart(fig_hourly_sales)
 
-st.title('雙重欄目')
+##  ---- Two Column ---
+#st.title('雙重欄目')
 left_column, right_column = st.columns(2)
 right_column.plotly_chart(fig_product_sales, use_container_width=True)
 left_column.plotly_chart(fig_hourly_sales, use_container_width=True)
 
 
+
+# # ---- Show Raw data ---
+st.title(":memo: RawData") #Dash
+expander = st.expander("點擊查看 Raw Data")
+expander.write("完整Rawdata")
+expander.dataframe(df_selection) #Display the selection result;
+
+# Check if the dataframe is empty:
+if df_selection.empty:
+    st.warning("No data available based on the current filter settings!")
+    st.stop() # This will halt the app from further execution.
+
+    
 # # ---- HIDE STREAMLIT STYLE ----
 # hide_st_style = """
 #             <style>
