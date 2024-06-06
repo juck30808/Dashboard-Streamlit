@@ -85,7 +85,7 @@ with middle_column:
     st.subheader("平均評價 (Rating):")
     st.subheader(f"{average_rating} {star_rating}")
 with right_column:
-    st.subheader("平均客單 (AveSales Per Trans):")
+    st.subheader("平均客單 (AvgSales/Tran):")
     st.subheader(f"USD $ {average_sale_by_transaction}")
 
 st.markdown("""---""")   #markdown spread
